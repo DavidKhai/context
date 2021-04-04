@@ -5,24 +5,12 @@ class EditUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: '',
-            name: '',
-            phone: '',
-            permission: ''
+            id: this.props.editObjItem.id,
+            name: this.props.editObjItem.name,
+            phone: this.props.editObjItem.phone,
+            permission: this.props.editObjItem.permission
         }
     }
-    //Chưa xong
-
-
-    
-    // componentWillReceiveProps(nextProps) {
-    //     this.setState({
-    //         id: nextProps.editObj.id,
-    //         name: nextProps.editObj.name,
-    //         phone: nextProps.editObj.phone,
-    //         permission: nextProps.editObj.permission,
-    //     });
-    // }
     
     
     
@@ -57,7 +45,7 @@ class EditUser extends Component {
                                     </select>
                                 </div>
                                 <div className="form-group">
-                                <div onClick={editObjItem.bind(this, this.state.name, this.state.phone, this.state.permission)} className="btn btn-sm btn-block btn-primary">Update</div>
+                                <div onClick={editObjItem.bind(this, this.state.id, this.state.name, this.state.phone, this.state.permission)} className="btn btn-sm btn-block btn-primary">Update</div>
                                     
                                 </div>
                             </div>

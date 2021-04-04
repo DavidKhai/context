@@ -9,7 +9,8 @@ class UserProvider extends Component {
             data: dl,
             statusFormAdd: false,
             statusFormEdit: false,
-            editObj: {}
+            editObj: {},
+            searchText: ''
         }
         this.showFormAdd = this.showFormAdd.bind(this);
         this.deleteUser = this.deleteUser.bind(this);
@@ -17,6 +18,7 @@ class UserProvider extends Component {
         this.showFormEdit = this.showFormEdit.bind(this);
         this.getItemEdit = this.getItemEdit.bind(this);
         this.editObjItem = this.editObjItem.bind(this);
+        this.getSearchText = this.getSearchText.bind(this);
     }
     showFormAdd = () => {
         this.setState({
@@ -60,14 +62,47 @@ class UserProvider extends Component {
 
         this.showFormEdit();
     }
-    editObjItem = (name, phone, permission) => {
-        console.log(name + " " + phone + " " + permission);
+    editObjItem = (id, name, phone, permission) => {
+        var editObject = {};
+        editObject.id = id;
+        editObject.name = name;
+        editObject.phone = phone;
+        editObject.permission = permission;
+
+        var dataTempAfterEdit = this.state.data;
+        dataTempAfterEdit.forEach((item) =>{
+            if(item.id === editObject.id){
+                item.name = editObject.name;
+                item.phone = editObject.phone;
+                item.permission = editObject.permission;
+            }
+        })
+
+        this.setState({
+            data: dataTempAfterEdit
+        });
+
+        this.showFormEdit();
+    }
+
+    getSearchText = (textSearch) => {
+        this.setState({
+            searchText: textSearch
+        });
     }
     
     render() {
+        var result = [];
+        this.state.data.forEach((item) => {
+            if(item.name.indexOf(this.state.searchText) !== -1){
+                result.push(item);
+            }
+        })
+        console.log(result);
+
         return (
             <UserContext.Provider value={{
-                data: this.state.data,
+                data: result,
                 statusFormAdd: this.state.statusFormAdd,
                 showFormAdd: this.showFormAdd,
                 deleteUser: this.deleteUser,
@@ -76,7 +111,8 @@ class UserProvider extends Component {
                 showFormEdit: this.showFormEdit,
                 getItemEdit: this.getItemEdit,
                 editObj: this.state.editObj,
-                editObjItem: this.editObjItem
+                editObjItem: this.editObjItem,
+                getSearchText: this.getSearchText
             }}>
                 {this.props.children}
             </UserContext.Provider>
