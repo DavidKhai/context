@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Pacific rim",
+        "phone": "0909090909",
+        "permission": "1"
+
+    },
+    {
+        "id": 2,
+        "name": "Iron man",
+        "phone": "4662359951",
+        "permission": "2"
+
+    },
+    {
+        "id": 3,
+        "name": "Captain Marvel",
+        "phone": "874545422",
+        "permission": "3"
+
+    },
+    {
+        "id": 4,
+        "name": "Doctor Strange",
+        "phone": "822565454",
+        "permission": "1"
+
+    },
+    {
+        "id": 5,
+        "name": "Spider men",
+        "phone": "0909090909",
+        "permission": "1"
+
+    }
+    
+]
