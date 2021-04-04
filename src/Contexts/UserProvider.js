@@ -11,6 +11,7 @@ class UserProvider extends Component {
         }
         this.showFormAdd = this.showFormAdd.bind(this);
         this.deleteUser = this.deleteUser.bind(this);
+        this.addUser = this.addUser.bind(this);
     }
     showFormAdd = () => {
         this.setState({
@@ -25,6 +26,20 @@ class UserProvider extends Component {
             data: dataAfterDelete
         });
     }
+
+    addUser = (name, phone, permission) => {
+        var dataAfterAdd = this.state.data;
+        var item = {};
+        item.name = name;
+        item.phone = phone;
+        item.permission = permission;
+        dataAfterAdd.push(item);
+        this.setState({
+            data: dataAfterAdd
+        });
+
+        this.showFormAdd();
+    }
     
     render() {
         return (
@@ -32,7 +47,8 @@ class UserProvider extends Component {
                 data: this.state.data,
                 statusFormAdd: this.state.statusFormAdd,
                 showFormAdd: this.showFormAdd,
-                deleteUser: this.deleteUser
+                deleteUser: this.deleteUser,
+                addUser:  this.addUser
             }}>
                 {this.props.children}
             </UserContext.Provider>
