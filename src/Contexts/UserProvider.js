@@ -7,11 +7,16 @@ class UserProvider extends Component {
         super(props);
         this.state = {
             data: dl,
-            statusFormAdd: false
+            statusFormAdd: false,
+            statusFormEdit: false,
+            editObj: {}
         }
         this.showFormAdd = this.showFormAdd.bind(this);
         this.deleteUser = this.deleteUser.bind(this);
         this.addUser = this.addUser.bind(this);
+        this.showFormEdit = this.showFormEdit.bind(this);
+        this.getItemEdit = this.getItemEdit.bind(this);
+        this.editObjItem = this.editObjItem.bind(this);
     }
     showFormAdd = () => {
         this.setState({
@@ -40,6 +45,24 @@ class UserProvider extends Component {
 
         this.showFormAdd();
     }
+
+    showFormEdit = () => {
+        this.setState({
+            statusFormEdit: !this.state.statusFormEdit
+        });
+    }
+
+
+    getItemEdit = (itemEdit) => {
+        this.setState({
+            editObj: itemEdit
+        });
+
+        this.showFormEdit();
+    }
+    editObjItem = (name, phone, permission) => {
+        console.log(name + " " + phone + " " + permission);
+    }
     
     render() {
         return (
@@ -48,7 +71,12 @@ class UserProvider extends Component {
                 statusFormAdd: this.state.statusFormAdd,
                 showFormAdd: this.showFormAdd,
                 deleteUser: this.deleteUser,
-                addUser:  this.addUser
+                addUser:  this.addUser,
+                statusFormEdit: this.state.statusFormEdit,
+                showFormEdit: this.showFormEdit,
+                getItemEdit: this.getItemEdit,
+                editObj: this.state.editObj,
+                editObjItem: this.editObjItem
             }}>
                 {this.props.children}
             </UserContext.Provider>

@@ -20,7 +20,14 @@ class Home extends Component {
                             }}
                         </UserContext.Consumer>
                         <ListUser/> 
-                        <EditUser/>
+                        <UserContext.Consumer>
+                            {({statusFormEdit}) => {
+                                if(statusFormEdit === true){
+                                    return <EditUser/>;
+                                }
+                            }}
+                        </UserContext.Consumer>
+                        
                     </div>
                 </div>
             </div>

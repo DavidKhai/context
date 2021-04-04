@@ -17,7 +17,12 @@ class UserItem extends Component {
                 <td>{this.permission()}</td>
                 <td>
                     <div className="btn-group">
-                    <div className="btn btn-sm btn-warning sua"><i className="fa  fa-edit" /> Sửa </div>
+                    <UserContext.Consumer>
+                        {({getItemEdit}) => (
+                            <div onClick={getItemEdit.bind(this, this.props.value)} className="btn btn-sm btn-warning sua"><i className="fa  fa-edit" /> Sửa </div>
+                        )}
+                    </UserContext.Consumer>
+                    
                     <UserContext.Consumer>
                         {({deleteUser}) => (
                             <div onClick={deleteUser.bind(this, this.props.value.id)} className="btn btn-sm btn-danger xoa"><i className="fa  fa-remove" /> Xóa </div>

@@ -1,30 +1,69 @@
 import React, { Component } from 'react';
-
+import UserContext from '../Contexts/UserContext';
 class EditUser extends Component {
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            id: '',
+            name: '',
+            phone: '',
+            permission: ''
+        }
+    }
+    //Chưa xong
+
+
+    
+    // componentWillReceiveProps(nextProps) {
+    //     this.setState({
+    //         id: nextProps.editObj.id,
+    //         name: nextProps.editObj.name,
+    //         phone: nextProps.editObj.phone,
+    //         permission: nextProps.editObj.permission,
+    //     });
+    // }
+    
+    
+    
+    
+    isChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState({
+            [name]: value
+        });
+    }
     render() {
         return (
             <div className="col-3 ">
                 <div className="card border-warning mb-3">
                     <div className="card-header text-center text-warning">Edit User</div>
-                    <div className="card-body text-primary">
-                        <div className="form-group">
-                            <input type="text" className="form-control" name="name" placeholder="Tên user" />
-                        </div>
-                        <div className="form-group">
-                            <input type="text" className="form-control" name="phone" placeholder="Điện thoại" />
-                        </div>
-                        <div className="form-group">
-                            <select className="custom-select" name="permission" required>
-                                <option value>Chọn quyền mặc định</option>
-                                <option value={1}>Admin</option>
-                                <option value={2}>Moderator</option>
-                                <option value={3}>Normal</option>
-                            </select>
-                        </div>
-                        <div className="form-group">
-                            <div className="btn btn-sm btn-block btn-primary">Update</div>
-                        </div>
-                    </div>
+                    <UserContext.Consumer>
+                        {({editObj, editObjItem}) => (
+                            <div className="card-body text-primary">
+                                <div className="form-group">
+                                    <input defaultValue={editObj.name} onChange={(event) => this.isChange(event)} type="text" className="form-control" name="name" placeholder="Tên user" />
+                                </div>
+                                <div className="form-group">
+                                    <input defaultValue={editObj.phone} onChange={(event) => this.isChange(event)} type="text" className="form-control" name="phone" placeholder="Điện thoại" />
+                                </div>
+                                <div className="form-group">
+                                    <select defaultValue={editObj.permission} onChange={(event) => this.isChange(event)} className="custom-select" name="permission" required>
+                                        <option value>Chọn quyền mặc định</option>
+                                        <option value={1}>Admin</option>
+                                        <option value={2}>Moderator</option>
+                                        <option value={3}>Normal</option>
+                                    </select>
+                                </div>
+                                <div className="form-group">
+                                <div onClick={editObjItem.bind(this, this.state.name, this.state.phone, this.state.permission)} className="btn btn-sm btn-block btn-primary">Update</div>
+                                    
+                                </div>
+                            </div>
+                        )}
+                        
+                    </UserContext.Consumer>  
                 </div>
             </div>
         );

@@ -16,9 +16,7 @@ class AddUser extends Component {
             [name]: value
         });
     }
-    // addUser = () => {
-    //     console.log(this.state.name + " " + this.state.phone + " " + this.state.permission);
-    // }
+    
     render() {
         return (
             <div className="col-sm-12 row">
